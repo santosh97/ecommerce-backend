@@ -1,0 +1,45 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Cart {
+  id: ID!
+  productIds: [String!]!
+  quantities: [Float!]!
+  userId: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Mutation {
+  addToCart(productId: String!, quantity: Int!, userId: String!): Cart!
+  checkout(userId: String!): Order!
+  removeFromCart(productId: String!, userId: String!): Cart!
+}
+
+type Order {
+  date: DateTime!
+  id: ID!
+  productIds: [String!]!
+  quantities: [Float!]!
+  totalPrice: Float!
+  userId: String!
+}
+
+type Product {
+  description: String!
+  id: ID!
+  name: String!
+  price: Float!
+  stock: Float!
+}
+
+type Query {
+  getCart(userId: String!): Cart!
+  getOrders(userId: String!): [Order!]!
+  getProduct(id: String!): Product!
+  getProducts(limit: Int!, page: Int!): [Product!]!
+}
